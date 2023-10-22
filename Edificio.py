@@ -12,7 +12,9 @@ class Edificio:
         self.listaSalones = []
     
     def __str__(self):
-        return "Edificio: "+str(self.id)
+        #a = f'Edificio: {self.id},numero estudiantes: {len(self.listaEstudiantes)},\n numero salones: {self.numeroSalones}, calle: {self.calle}, carrera:{self.carrera}'
+        a = f'{self.id} est: {len(self.listaEstudiantes)} min: {self.capMin}, Opt:{self.capOpt}, Max:{self.capMax}'
+        return a 
     
 #Clase para identificar los salones
 class Salon:

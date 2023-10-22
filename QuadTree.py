@@ -11,6 +11,10 @@ class Area:
         self.y = y
         self.ancho = ancho
         self.alto = alto
+    def __str__(self):
+        a = f' Ancho: {self.ancho}, Alto: {self.alto}'
+        return a
+        
 
 #Clase del quadtree
 class QuadTree:
@@ -160,21 +164,28 @@ class QuadTree:
         #Si el cuadrante no está dividido, se inserta el estudiante en el edificio correspondiente
         if(not self.dividido):
             #Se verifica que el cuadrante no esté vacío, en caso de que si esté vacío se toman los edificios de los cuadrantes vecinos
-            areaSiguiente = self.next
-            arearAnterior = self.before
-            edificiosDisponibles = self.edificios
-            while (len(edificiosDisponibles) <= 0):
-                edificiosDisponibles = areaSiguiente.edificios
-                edificiosDisponibles.extend(arearAnterior.edificios)
-                areaSiguiente = areaSiguiente.next
-                arearAnterior = arearAnterior.before
+            if self.next  != None and self.before != None:
+                areaSiguiente = self.next
+                arearAnterior = self.before
+                edificiosDisponibles = self.edificios
+                while (len(edificiosDisponibles) <= 0):
+                #puse los ifs porque a veces me daba error
+                # a veces = cuando incremento los estudiantes
+                    if areaSiguiente != None:
+                        edificiosDisponibles = areaSiguiente.edificios
+                        areaSiguiente = areaSiguiente.next
+                    if arearAnterior != None:
+                        edificiosDisponibles.extend(arearAnterior.edificios)
+                        arearAnterior = arearAnterior.before
+            
             #Se recorren los edificios del cuadrante con el fin de encontrar el más cercano
-            edificioCercano = edificiosDisponibles[0]
-            for e in self.edificios:
+                edificioCercano = edificiosDisponibles[0]
+                for e in self.edificios:
                 #If es mas cercano se actuliza edificio cercano Falta hacerlo bien :v
-                sqrt((e.carrera -estudiante.carrera)**2 + (e.calle - estudiante.calle)**2)
+                    sqrt((e.carrera -estudiante.carrera)**2 + (e.calle - estudiante.calle)**2)
             #Se agrega el estudiante al edificio más cercano
-            edificioCercano.estudiantes.append()
+            #modificacion del atributo
+                edificioCercano.listaEstudiantes.append(estudiante)
 
         #Si el cuadrante está dividido, se inserta el estudiante en el cuadrante correspondiente
         elif (estudiante.calle < self.limite.x + self.limite.ancho/2):
@@ -193,15 +204,20 @@ class QuadTree:
     def imprimirEdificios(self):
         if (not self.dividido):
             if (len(self.edificios) <= 0):
-                print("Ningun edificio en este cuadrante")
+                print("Ningun edificio en este cuadrante con limite: ")
+                print(self.limite)
             else:
+                #eliminar repetidos
+                self.edificios = list(set(self.edificios))
                 for edificio in self.edificios:
                     print(edificio)
+                
         else:
             print("Cuadrante dividido")
     
     #Función para imprimir los edificios de cada cuadrante desde la hoja actual en adelante
     def recorrerDesdeHoja(self):
+        
         x = self
         while (x.dividido):
             x = x.no
@@ -210,5 +226,6 @@ class QuadTree:
             print("------------------")
             x = x.next
         x.imprimirEdificios()
+       
 
 
