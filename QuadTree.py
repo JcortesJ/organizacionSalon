@@ -1,6 +1,16 @@
 
 from math import sqrt
 
+#Clase para identificar los estudiantes
+class Estudiante:
+    def __init__(self, id, calle, carrera): 
+        self.id = id
+        self.calle = calle 
+        self.carrera = carrera 
+    
+    def __str__(self):
+        return "id: " + str(self.id) + " calle: " + str(self.calle) + " carrera: " + str(self.carrera)
+
 #Clase para identificar los edificios
 class Edificio:
     def __init__(self, calle, carrera, id): 
@@ -11,6 +21,16 @@ class Edificio:
         self.capMax = 0
         self.capMin = 0
         self.capOpt = 0
+        self.salones = []
+
+#Clase para identificar los salones
+class Salon:
+    def __init__(self, idSalon, capMin, capOpt, capMax): 
+        self.idSalon = idSalon # Contiene el piso y el número de salon
+        self.capMin = capMin
+        self.capOpt = capOpt
+        self.capMax = capMax
+
 
 #Clase para identificar el área que cubre el cuadrante en el mapa
 class Area:
@@ -41,7 +61,7 @@ class QuadTree:
 
         #Se crean los nuevos 4 cuadrantes
         self.no = QuadTree(Area(x, y, ancho, alto)) #Zona noroeste
-        self.so = QuadTree(Area(x, y+alto, ancho, alto)) #Zona sureste
+        self.so = QuadTree(Area(x, y+alto, ancho, alto)) #Zona suroeste
         self.ne = QuadTree(Area(x+ancho, y, ancho, alto)) #Zona noreste
         self.se = QuadTree(Area(x+ancho, y+alto, ancho, alto)) #Zona sureste
         

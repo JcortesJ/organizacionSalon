@@ -1,4 +1,20 @@
-from QuadTree import Area,Edificio,QuadTree
+import random
+from QuadTree import Area,Edificio,QuadTree,Estudiante
+
+def generar_estudiantes(n):
+    estudiantes = []
+    for i in range(n):
+        id = random.randint(1000000000, 9999999999)
+        calle = random.randint(0, 250)
+        carrera = random.randint(0, 250)
+        estudiante = Estudiante(id, calle, carrera)
+        estudiantes.append(estudiante)
+    return estudiantes
+
+nEst = 10
+listaEstudiantes = generar_estudiantes(nEst)
+for i in range(nEst):
+    print(listaEstudiantes[i])
 
 arbol = QuadTree(Area(0,0,100,100))
 
