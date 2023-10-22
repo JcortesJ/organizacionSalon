@@ -1,5 +1,8 @@
 import random
-from QuadTree import Area,Edificio,QuadTree,Estudiante
+from QuadTree import Area,QuadTree
+from Estudiante import Estudiante
+from prueba import run
+from Edificio import Edificio,Salon
 
 def generar_estudiantes(n):
     estudiantes = []
@@ -16,23 +19,15 @@ listaEstudiantes = generar_estudiantes(nEst)
 for i in range(nEst):
     print(listaEstudiantes[i])
 
-arbol = QuadTree(Area(0,0,100,100))
 
-arbol.insertarEdificio(Edificio(10,10,1))
-arbol.insertarEdificio(Edificio(20,10,2))
-arbol.insertarEdificio(Edificio(20,20,3))
-arbol.insertarEdificio(Edificio(10,20,4))
-arbol.insertarEdificio(Edificio(10,30,5))
-arbol.insertarEdificio(Edificio(30,30,6))
-arbol.insertarEdificio(Edificio(30,10,7))
-arbol.insertarEdificio(Edificio(60,10,8))
-arbol.insertarEdificio(Edificio(90,10,9))
-arbol.insertarEdificio(Edificio(90,30,10))
-arbol.insertarEdificio(Edificio(60,30,11))
-arbol.insertarEdificio(Edificio(30,60,12))
+raiz = QuadTree(Area(0,0,250,250))
 
-#arbol.insertarEdificio(Edificio(30,30,6))
+edificios = run()
+for i in edificios:
+    raiz.insertarEdificio(i)
 
-#arbol.no.no.imprimirEdificios()
-arbol.recorrerDesdeHoja()
-#arbol.so.imprimirEdificios()
+#raiz.insertarEdificio(Edificio(30,30,6))
+
+#raiz.no.no.imprimirEdificios()
+raiz.recorrerDesdeHoja()
+#raiz.so.imprimirEdificios()

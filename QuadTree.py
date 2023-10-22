@@ -1,35 +1,7 @@
 
 from math import sqrt
-
-#Clase para identificar los estudiantes
-class Estudiante:
-    def __init__(self, id, calle, carrera): 
-        self.id = id
-        self.calle = calle 
-        self.carrera = carrera 
-    
-    def __str__(self):
-        return "id: " + str(self.id) + " calle: " + str(self.calle) + " carrera: " + str(self.carrera)
-
-#Clase para identificar los edificios
-class Edificio:
-    def __init__(self, calle, carrera, id): 
-        self.id = id
-        self.calle = calle #Eje x
-        self.carrera = carrera #Eje y
-        self.estudiantes = []
-        self.capMax = 0
-        self.capMin = 0
-        self.capOpt = 0
-        self.salones = []
-
-#Clase para identificar los salones
-class Salon:
-    def __init__(self, idSalon, capMin, capOpt, capMax): 
-        self.idSalon = idSalon # Contiene el piso y el número de salon
-        self.capMin = capMin
-        self.capOpt = capOpt
-        self.capMax = capMax
+from Edificio import Edificio,Salon
+from Estudiante import Estudiante
 
 
 #Clase para identificar el área que cubre el cuadrante en el mapa
@@ -224,7 +196,7 @@ class QuadTree:
                 print("Ningun edificio en este cuadrante")
             else:
                 for edificio in self.edificios:
-                    print(edificio.id)
+                    print(edificio)
         else:
             print("Cuadrante dividido")
     
