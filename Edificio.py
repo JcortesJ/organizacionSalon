@@ -10,6 +10,7 @@ class Edificio:
         self.carrera = carrera
         self.listaEstudiantes = []
         self.listaSalones = []
+        self.disponible = True
     
     def __str__(self):
         #a = f'Edificio: {self.id},numero estudiantes: {len(self.listaEstudiantes)},\n numero salones: {self.numeroSalones}, calle: {self.calle}, carrera:{self.carrera}'
