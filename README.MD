@@ -15,4 +15,4 @@ El Quadtree es una estructura de datos jerárquica que divide el espacio en cuat
 3. **Visualización del Mapa:** Los usuarios podrán ver una representación gráfica de la cuadrícula con los puntos y divisiones del Quadtree.
 
 ### Visualizacion del mapa 
-"mapaOrganizado.png"
+![Imagen del mapa](./mapaOrganizado.jpg)
