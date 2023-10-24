@@ -35,8 +35,8 @@ for i in edificios:
     raiz.insertarEdificio(i)
 
 #raiz.insertarEdificio(Edificio(30,30,6))
-for j in listaEstudiantes:
-    raiz.insertarEstudiante(j)
+#for j in listaEstudiantes:
+#    raiz.insertarEstudiante(j)
 #raiz.no.no.imprimirEdificios()
 #raiz.acomodarDesdeHoja()
 raiz.recorrerDesdeHoja()
