@@ -171,7 +171,7 @@ class QuadTree:
         #Si el cuadrante no está dividido, se inserta el estudiante en el edificio correspondiente
         if(not self.dividido):
             #Se verifica que el cuadrante no esté vacío, en caso de que si esté vacío se toman los edificios de los cuadrantes vecinos
-            if self.next  != None and self.before != None:
+            if self.next  != None or self.before != None:
                 areaSiguiente = self.next
                 arearAnterior = self.before
                 edificiosDisponibles = self.verificarEdificiosDisponibles(self.edificios)
@@ -181,9 +181,11 @@ class QuadTree:
                     if areaSiguiente != None:
                         edificiosDisponibles = self.verificarEdificiosDisponibles(areaSiguiente.edificios)
                         areaSiguiente = areaSiguiente.next
+                        
                     if arearAnterior != None:
                         edificiosDisponibles.extend(arearAnterior.edificios)
                         arearAnterior = arearAnterior.before
+                        
             
             #Se recorren los edificios del cuadrante con el fin de encontrar el más cercano
                 edificioCercanos = [edificiosDisponibles[0]]
@@ -213,7 +215,7 @@ class QuadTree:
                         estudiante.lugar = edificioCercano.id
                         estudiante.distancia = sqrt((edificioCercano.carrera -estudiante.carrera)**2 + (edificioCercano.calle - estudiante.calle)**2)
                         asignado = True
-                        print('Estudiante asignado: ',estudiante.id, 'lugar: ',estudiante.lugar, ' distancia: ',estudiante.distancia, 'CalleOri: ',estudiante.calle, 'carreraOri: ',estudiante.carrera)
+                        #print('Estudiante asignado: ',estudiante.id, 'lugar: ',estudiante.lugar, ' distancia: ',estudiante.distancia, 'CalleOri: ',estudiante.calle, 'carreraOri: ',estudiante.carrera)
                         return estudiante
                     elif (ocupacion == edificioCercano.capMax-1):
                         edificioCercano.listaEstudiantes.append(estudiante)
@@ -221,7 +223,7 @@ class QuadTree:
                         estudiante.distancia = sqrt((edificioCercano.carrera -estudiante.carrera)**2 + (edificioCercano.calle - estudiante.calle)**2)
                         asignado = True
                         edificioCercano.disponible = False  
-                        print('Estudiante asignado: ',estudiante.id)
+                        #print('Estudiante asignado: ',estudiante.id)
                         return estudiante                 
                     i += 1
 
@@ -266,63 +268,103 @@ class QuadTree:
                 
     #Función para imprimir los edificios del cuadrante
     def imprimirEdificios(self):
+        edificiosNoUsados = []
         if (not self.dividido):
             if (len(self.edificios) <= 0):
                 print("Ningun edificio en este cuadrante con limite: ")
                 print(self.limite)
+
             else:
                 #eliminar repetidos
                 self.edificios = list(set(self.edificios))
+                omitido = 0
                 for edificio in self.edificios:
-                    print(edificio)
+                    #solo mostramos los edificios con estudiantes
+                    if len(edificio.listaEstudiantes)>0:
+                        print(edificio)
+                    else:
+                        omitido += 1
+                        edificiosNoUsados.append(edificio)
+                print(f'Edificios omitidos {omitido}/{len(self.edificios)}')
+                
                 
         else:
             print("Cuadrante dividido")
+
+        return edificiosNoUsados
     
     #Función para imprimir los edificios de cada cuadrante desde la hoja actual en adelante
-    def recorrerDesdeHoja(self): 
+    def recorrerDesdeHoja(self):
+        edificiosNoUsados = [] 
         x = self
         while (x.dividido):
             x = x.no
         while (x.next != None):
-            x.imprimirEdificios()
+            edificiosNoUsados.extend(x.imprimirEdificios())
+            
             print("------------------")
             x = x.next
-        x.imprimirEdificios()
+        edificiosNoUsados.extend(x.imprimirEdificios())
+        return edificiosNoUsados
         #Función para imprimir los edificios del cuadrante
     def acomodarEdificios(self):
         if (not self.dividido):
-            if (len(self.edificios) > 0):
+ 
+            if (len(self.edificios) > 1):
                 #primero ajustamos a todos los edificios a que tengan el minimo
+                """
+                print('**********************')
+                print('Configuracion inicial del cuadrante:')
+                for e in self.edificios:
+                    print(e)   
+                """
                 extraEstudiantes = []
                 for edificio in self.edificios:
-                    if(len(edificio.listaEstudiantes) > edificio.capMin):
+                    #if(len(edificio.listaEstudiantes) > edificio.capMin):
                         #primero vamos a llenar la lista extra estudiantes
-                        extraEstudiantes = edificio.listaEstudiantes
+                        extraEstudiantes.extend(edificio.listaEstudiantes)
                         edificio.listaEstudiantes = []
-                        break
-                i = 0
-                while(i < len(self.edificios) and len(extraEstudiantes)!=0):
-                    if(len(edificio.listaEstudiantes) > edificio.capMin):
-                        #calculamos la diferencia
-                        dif = len(edificio.listaEstudiantes) - edificio.capMin
-                        #sacamos a los estudiantes extras y los metemos en la lista
-                        extraEstudiantes.extend(edificio.listaEstudiantes[:dif])
-                        #actualizamos la lista del edificio al minimo
-                        edificio.listaEstudiantes = edificio.listaEstudiantes[dif:]
-                    elif (len(edificio.listaEstudiantes) < edificio.capMin and len(extraEstudiantes)> 0 ):
-                        #metemos al minimo de estudiantes en el edificio pero primero calculamos la diferencia
-                        dif = len(extraEstudiantes) - edificio.capMin
-                        if(dif>0):
-                            #hay suficientes estudiantes para meterlos y metemos solo el minimo
-                            edificio.listaEstudiantes.extend(extraEstudiantes[:dif])
-                            #actualizamos la lista de estudiantes extras
-                            extraEstudiantes = extraEstudiantes[dif:]
-                        else:
-                            #solo podemos meter los estudiantes extras que haya
-                            edificio.listaEstudiantes.extend(extraEstudiantes)
-                    i+=1
+
+                #luego reacomodamos la lista para que estén primero los salones que tienen capacidad minima mas baja
+                #con el fin de llenarlos primero
+                if(self.edificios[0].capMin > self.edificios[1].capMin ):
+                    aux = self.edificios[0]
+                    self.edificios[0] = self.edificios[1]
+                    self.edificios[1] = aux 
                     
+                for e in range(len(self.edificios)):
+                    if self.edificios[e].capMin < len(extraEstudiantes):
+                        if e+1<len(self.edificios):
+                            if (len(extraEstudiantes)-self.edificios[e].capMin)-self.edificios[e+1].capMin < 0:
+                            #si ya no hay sufucientes estudiantes para meterlos en el otro salon
+                            #pues la diferencia es negativa, metelos todos
+                                self.edificios[e].listaEstudiantes = extraEstudiantes
+                                extraEstudiantes = None
+                                break
+                            else:
+                            #si si, mete solo hasta el minimo
+                                self.edificios[e].listaEstudiantes.extend(extraEstudiantes[:self.edificios[e].capMin])
+                                extraEstudiantes = extraEstudiantes[self.edificios[e].capMin:]
+                        else:
+                        #insertamos lo que podamos si es el ultimo elemento
+                            self.edificios[e].listaEstudiantes.extend(extraEstudiantes)
+                            extraEstudiantes = None
+                    elif e==0 and self.edificios[e].capMin > len(extraEstudiantes):
+                        #si estamos en el primer elemento y los estudiantes extra no alcanzan
+                        #los metemos todos en el primero que es el del minimo mas bajo
+                        self.edificios[e].listaEstudiantes = extraEstudiantes
+                        extraEstudiantes = None
+                        break
+                                
+            """    
+                for e in self.edificios:
+                    print(e)
+                print('----------')   
+                
+            elif len(self.edificios)==1:
+                    print(self.edificios[0])
+                    print('--------')
+            """
 
     #funcion para acomodar a los estudiantes al minimo de edificios y meterlos en salon
     def acomodarDesdeHoja(self):

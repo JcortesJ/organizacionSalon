@@ -8,7 +8,7 @@ def run():
     Edificio(id = 3,capMin=1, capOpt=12, capMax=22, numeroSalones=2, calle=85, carrera=120,pisos=2),
     Edificio(id = 4,capMin=7, capOpt=18, capMax=37, numeroSalones=6, calle=200, carrera=40,pisos=6),
     Edificio(id = 5,capMin=3, capOpt=25, capMax=38, numeroSalones=9, calle=150, carrera=55,pisos=2),
-    Edificio(id = 6,capMin=0, capOpt=13, capMax=33, numeroSalones=1, calle=100, carrera=200,pisos=3),
+    Edificio(id = 6,capMin=1, capOpt=13, capMax=33, numeroSalones=1, calle=100, carrera=200,pisos=3),
     Edificio(id = 7,capMin=4, capOpt=22, capMax=39, numeroSalones=3, calle=70, carrera=125,pisos=2),
     Edificio(id = 8,capMin=9, capOpt=29, capMax=32, numeroSalones=7, calle=110, carrera=35,pisos=2),
     Edificio(id = 9,capMin=6, capOpt=21, capMax=36, numeroSalones=5, calle=220, carrera=65,pisos=1),

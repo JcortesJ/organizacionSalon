@@ -15,7 +15,7 @@ class Edificio:
     
     def __str__(self):
         #a = f'Edificio: {self.id},numero estudiantes: {len(self.listaEstudiantes)},\n numero salones: {self.numeroSalones}, calle: {self.calle}, carrera:{self.carrera}'
-        a = f'{self.id} est: {len(self.listaEstudiantes)} min: {self.capMin}, Opt:{self.capOpt}, Max:{self.capMax}'
+        a = f'{self.id} est: {len(self.listaEstudiantes)} min: {self.capMin}, Opt:{self.capOpt}, Max:{self.capMax}  calle: {self.calle}, carrera:{self.carrera}'
         return a 
     def crearSalones(self):
         #primero tomamos los valores para cada salon
