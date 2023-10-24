@@ -160,32 +160,70 @@ class QuadTree:
                 else:
                     self.se.insertarEdificio(edificio)
     
-    def insertarEstudiante(self,estudiante):
+    def verificarEdificiosDisponibles (self, edificios):
+        edificiosDisponibles = []
+        for e in edificios:
+            if e.disponible:
+                edificiosDisponibles.append(e)
+        return edificiosDisponibles
+    
+    def insertarEstudiante(self,estudiante:Estudiante):
         #Si el cuadrante no está dividido, se inserta el estudiante en el edificio correspondiente
         if(not self.dividido):
             #Se verifica que el cuadrante no esté vacío, en caso de que si esté vacío se toman los edificios de los cuadrantes vecinos
             if self.next  != None and self.before != None:
                 areaSiguiente = self.next
                 arearAnterior = self.before
-                edificiosDisponibles = self.edificios
+                edificiosDisponibles = self.verificarEdificiosDisponibles(self.edificios)
                 while (len(edificiosDisponibles) <= 0):
                 #puse los ifs porque a veces me daba error
                 # a veces = cuando incremento los estudiantes
                     if areaSiguiente != None:
-                        edificiosDisponibles = areaSiguiente.edificios
+                        edificiosDisponibles = self.verificarEdificiosDisponibles(areaSiguiente.edificios)
                         areaSiguiente = areaSiguiente.next
                     if arearAnterior != None:
                         edificiosDisponibles.extend(arearAnterior.edificios)
                         arearAnterior = arearAnterior.before
             
             #Se recorren los edificios del cuadrante con el fin de encontrar el más cercano
-                edificioCercano = edificiosDisponibles[0]
-                for e in self.edificios:
-                #If es mas cercano se actuliza edificio cercano Falta hacerlo bien :v
-                    sqrt((e.carrera -estudiante.carrera)**2 + (e.calle - estudiante.calle)**2)
-            #Se agrega el estudiante al edificio más cercano
-            #modificacion del atributo
-                edificioCercano.listaEstudiantes.append(estudiante)
+                edificioCercanos = [edificiosDisponibles[0]]
+                distanciaMinima = sqrt((edificioCercanos[0].carrera -estudiante.carrera)**2 + (edificioCercanos[0].calle - estudiante.calle)**2)
+                
+                # Ordena los edificios por distancia en comparación a la primera
+                for e in edificiosDisponibles:
+                    distancia = sqrt((e.carrera -estudiante.carrera)**2 + (e.calle - estudiante.calle)**2)
+                    if ( distancia <= distanciaMinima and e.disponible):
+                        edificioCercanos.insert(0,e)
+                        distanciaMinima = distancia
+                
+                # Agrega los edificios que no estan en la lista de edificios cercanos
+                for e in edificiosDisponibles:
+                    if (e not in edificioCercanos and e.disponible):
+                        edificioCercanos.append(e)
+                
+                asignado = False
+                i = 0
+                #Se agrega el estudiante al edificio más cercano
+                #modificacion del atributo
+                while (not asignado and i < len(edificioCercanos)):
+                    edificioCercano = edificioCercanos[i]
+                    ocupacion = len(edificioCercano.listaEstudiantes)
+                    if  ( ocupacion < edificioCercano.capMax-1):
+                        edificioCercano.listaEstudiantes.append(estudiante)
+                        estudiante.lugar = edificioCercano.id
+                        estudiante.distancia = sqrt((edificioCercano.carrera -estudiante.carrera)**2 + (edificioCercano.calle - estudiante.calle)**2)
+                        asignado = True
+                        print('Estudiante asignado: ',estudiante.id, 'lugar: ',estudiante.lugar, ' distancia: ',estudiante.distancia, 'CalleOri: ',estudiante.calle, 'carreraOri: ',estudiante.carrera)
+                        return estudiante
+                    elif (ocupacion == edificioCercano.capMax-1):
+                        edificioCercano.listaEstudiantes.append(estudiante)
+                        estudiante.lugar = edificioCercano.id
+                        estudiante.distancia = sqrt((edificioCercano.carrera -estudiante.carrera)**2 + (edificioCercano.calle - estudiante.calle)**2)
+                        asignado = True
+                        edificioCercano.disponible = False  
+                        print('Estudiante asignado: ',estudiante.id)
+                        return estudiante                 
+                    i += 1
 
         #Si el cuadrante está dividido, se inserta el estudiante en el cuadrante correspondiente
         elif (estudiante.calle < self.limite.x + self.limite.ancho/2):
@@ -199,7 +237,33 @@ class QuadTree:
             else:
                 self.se.insertarEstudiante(estudiante)
 
-
+    def asignarSalones(self,edificio:Edificio):
+        ocupacion = len(edificio.listaEstudiantes)
+        if (ocupacion < edificio.capMin):
+            return None
+        elif (ocupacion < edificio.capOpt):
+            k = 0
+            for i in range(0,len(edificio.listaSalones)):
+                for j in range(0,edificio.listaSalones[i].capMin):
+                    edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[k])
+                    edificio.listaEstudiantes[k].lugar = edificio.listaSalones[i].idSalon
+                    k += 1
+            for i in range(0,len(edificio.listaSalones)):
+                for j in range(edificio.listaSalones[i].capMin,edificio.listaSalones[i].capOpt):
+                    edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[j])
+                    edificio.listaEstudiantes[j].lugar = edificio.listaSalones[i].idSalon
+        elif (ocupacion < edificio.capMax):
+            k = 0
+            for i in range(0,len(edificio.listaSalones)):
+                for j in range(0,edificio.listaSalones[i].capOpt):
+                    edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[k])
+                    edificio.listaEstudiantes[k].lugar = edificio.listaSalones[i].idSalon
+                    k += 1
+            for i in range(0,len(edificio.listaSalones)):
+                for j in range(edificio.listaSalones[i].capOpt,edificio.listaSalones[i].capMax):
+                    edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[j])
+                    edificio.listaEstudiantes[j].lugar = edificio.listaSalones[i].idSalon
+                
     #Función para imprimir los edificios del cuadrante
     def imprimirEdificios(self):
         if (not self.dividido):
