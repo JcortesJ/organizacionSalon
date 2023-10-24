@@ -8,4 +8,4 @@ class Estudiante:
         self.lugar = ""
     
     def __str__(self):
-        return "id: " + str(self.id) + " calle: " + str(self.calle) + " carrera: " + str(self.carrera)
+        return "id: " + str(self.id) + " calle: " + str(self.calle) + " carrera: " + str(self.carrera) + " lugar: " + str(self.lugar) + " distancia: " + str(self.distancia)
