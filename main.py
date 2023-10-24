@@ -38,6 +38,7 @@ for i in edificios:
 for j in listaEstudiantes:
     raiz.insertarEstudiante(j)
 #raiz.no.no.imprimirEdificios()
+#raiz.acomodarDesdeHoja()
 raiz.recorrerDesdeHoja()
 #raiz.so.imprimirEdificios()
 
