@@ -242,30 +242,123 @@ class QuadTree:
     def asignarSalones(self,edificio:Edificio):
         ocupacion = len(edificio.listaEstudiantes)
         if (ocupacion < edificio.capMin):
-            return None
+            nEstAsignados= 0
+            for i in range(0,len(edificio.listaSalones)):
+                for j in range(0,ocupacion):
+                    if (nEstAsignados< ocupacion):
+                        edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[k])
+                        edificio.listaEstudiantes[k].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[i].idSalon
+                        nEstAsignados+= 1     
+                    else:
+                        break      
         elif (ocupacion < edificio.capOpt):
-            k = 0
+            nEstAsignados= 0
             for i in range(0,len(edificio.listaSalones)):
                 for j in range(0,edificio.listaSalones[i].capMin):
                     edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[k])
                     edificio.listaEstudiantes[k].lugar = edificio.listaSalones[i].idSalon
-                    k += 1
+                    nEstAsignados+= 1
             for i in range(0,len(edificio.listaSalones)):
                 for j in range(edificio.listaSalones[i].capMin,edificio.listaSalones[i].capOpt):
-                    edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[j])
-                    edificio.listaEstudiantes[j].lugar = edificio.listaSalones[i].idSalon
-        elif (ocupacion < edificio.capMax):
-            k = 0
+                    if (nEstAsignados< ocupacion):
+                        edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[j])
+                        edificio.listaEstudiantes[j].lugar = edificio.listaSalones[i].idSalon
+                        k+=1
+                    else:
+                        break
+        elif (ocupacion <= edificio.capMax):
+            nEstAsignados= 0
             for i in range(0,len(edificio.listaSalones)):
                 for j in range(0,edificio.listaSalones[i].capOpt):
                     edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[k])
                     edificio.listaEstudiantes[k].lugar = edificio.listaSalones[i].idSalon
-                    k += 1
+                    nEstAsignados+= 1
             for i in range(0,len(edificio.listaSalones)):
                 for j in range(edificio.listaSalones[i].capOpt,edificio.listaSalones[i].capMax):
-                    edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[j])
-                    edificio.listaEstudiantes[j].lugar = edificio.listaSalones[i].idSalon
+                    if (nEstAsignados< ocupacion):
+                        edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[j])
+                        edificio.listaEstudiantes[j].lugar = edificio.listaSalones[i].idSalon
+                        k+=1
+                    else:
+                        break
+
+    def asignarSalonesV2(self,edificio:Edificio):
+        ocupacion = len(edificio.listaEstudiantes)
+
+        if (ocupacion < edificio.capMin):
+            nEstAsignados = 0
+            nSalones = len(edificio.listaSalones)
+            salonActual = 0
+            nEstEnSalon = 0
+
+            for i in range(0,ocupacion):
+                if (i < edificio.listaSalones[salonActual].capMin-nEstEnSalon+nEstAsignados):
+                    edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
+                    edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
+                    nEstAsignados+= 1    
+                    nEstEnSalon+=1
+                else:
+                    salonActual+=1 
+                    nEstEnSalon = 0
                 
+        elif (ocupacion < edificio.capOpt):
+            nEstAsignados= 0
+            nSalones = len(edificio.listaSalones)
+            salonActual = 0
+            nEstEnSalon = 0
+
+            for i in range(0,ocupacion):
+                if (i < edificio.listaSalones[salonActual].capMin-nEstEnSalon+nEstAsignados):
+                    edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
+                    edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
+                    nEstAsignados+= 1    
+                    nEstEnSalon+=1
+                else:
+                    if (salonActual < nSalones): 
+                        salonActual+=1 
+                        nEstEnSalon = 0
+                    else:
+                        break
+
+            for i in range(nEstAsignados,ocupacion):
+                if (i < edificio.listaSalones[salonActual].capOpt-nEstEnSalon+nEstAsignados):
+                    edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
+                    edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
+                    nEstAsignados+= 1    
+                    nEstEnSalon+=1
+                else:
+                    salonActual+=1 
+                    nEstEnSalon = 0
+
+        elif (ocupacion <= edificio.capMax):
+            nEstAsignados= 0
+            nSalones = len(edificio.listaSalones)
+            salonActual = 0
+            nEstEnSalon = 0
+
+            for i in range(0,ocupacion):
+                if (i < edificio.listaSalones[salonActual].capOpt-nEstEnSalon+nEstAsignados):
+                    edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
+                    edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
+                    nEstAsignados+= 1    
+                    nEstEnSalon+=1
+                else:
+                    if (salonActual < nSalones): 
+                        salonActual+=1 
+                        nEstEnSalon = 0
+                    else:
+                        break
+
+            for i in range(nEstAsignados,ocupacion):
+                if (i < edificio.listaSalones[salonActual].capMax-nEstEnSalon+nEstAsignados):
+                    edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
+                    edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
+                    nEstAsignados+= 1    
+                    nEstEnSalon+=1
+                else:
+                    salonActual+=1 
+                    nEstEnSalon = 0
+
     #Función para imprimir los edificios del cuadrante
     def imprimirEdificios(self):
         edificiosNoUsados = []
@@ -306,6 +399,8 @@ class QuadTree:
             x = x.next
         edificiosNoUsados.extend(x.imprimirEdificios())
         return edificiosNoUsados
+
+        
         #Función para imprimir los edificios del cuadrante
     #Funcion para acomodar los edificios a que cumplan el mínimo o lo más cercano a este
     def acomodarEdificios(self):
@@ -377,6 +472,11 @@ class QuadTree:
                         self.edificios[0].listaEstudiantes.extend(moverEstudiantes)
                         #actualizamos la lista
                         self.edificios[1].listaEstudiantes = self.edificios[1].listaEstudiantes[:self.edificios[1].capMax]
+                        
+                #Una vez hemos revisado el cuadrante asignamos los salones
+                for e in self.edificios:
+                    if len(e.listaEstudiantes)>0:
+                        self.asignarSalones(edificio=e)
                                 
             """    
                 for e in self.edificios:
@@ -400,3 +500,4 @@ class QuadTree:
     
 
 
+#calculando el centroide ude una región se puedee contruir un grafioadpproximado

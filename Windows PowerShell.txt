@@ -1,0 +1,75 @@
+PS C:\Users\juan manuel\OneDrive\Escritorio\problema> python3 .\main.py
+con mi metodo
+Ningun edificio en este cuadrante con limite:
+ Ancho: 62.5, Alto: 62.5
+------------------
+15 est: 122 min: 6, Opt:102, Max:210  calle: 40, carrera:100
+18 est: 64 min: 18, Opt:52, Max:64  calle: 35, carrera:70
+Edificios omitidos 0/2
+------------------
+Ningun edificio en este cuadrante con limite:
+ Ancho: 31.25, Alto: 31.25
+------------------
+3 est: 31 min: 2, Opt:24, Max:44  calle: 85, carrera:120
+Edificios omitidos 0/1
+------------------
+22 est: 23 min: 32, Opt:112, Max:144  calle: 100, carrera:120
+Edificios omitidos 0/1
+------------------
+12 est: 24 min: 21, Opt:112, Max:238  calle: 95, carrera:80
+Edificios omitidos 0/1
+------------------
+8 est: 92 min: 63, Opt:203, Max:224  calle: 110, carrera:35
+Edificios omitidos 1/2
+------------------
+14 est: 20 min: 20, Opt:76, Max:152  calle: 180, carrera:50
+5 est: 68 min: 27, Opt:225, Max:342  calle: 150, carrera:55
+Edificios omitidos 0/2
+------------------
+19 est: 6 min: 6, Opt:18, Max:33  calle: 195, carrera:15
+4 est: 102 min: 42, Opt:108, Max:222  calle: 200, carrera:40
+Edificios omitidos 0/2
+------------------
+25 est: 16 min: 16, Opt:56, Max:72  calle: 227, carrera:121
+9 est: 79 min: 30, Opt:105, Max:180  calle: 220, carrera:65
+Edificios omitidos 0/2
+------------------
+1 est: 99 min: 8, Opt:60, Max:100  calle: 130, carrera:75
+Edificios omitidos 0/1
+------------------
+26 est: 144 min: 32, Opt:112, Max:144  calle: 180, carrera:128
+24 est: 76 min: 24, Opt:84, Max:108  calle: 160, carrera:170
+Edificios omitidos 0/2
+------------------
+Ningun edificio en este cuadrante con limite:
+ Ancho: 62.5, Alto: 62.5
+------------------
+21 est: 72 min: 16, Opt:56, Max:72  calle: 210, carrera:240
+Edificios omitidos 0/1
+------------------
+27 est: 72 min: 16, Opt:56, Max:72  calle: 144, carrera:219
+Edificios omitidos 0/1
+------------------
+20 est: 103 min: 24, Opt:84, Max:108  calle: 10, carrera:240
+10 est: 16 min: 16, Opt:46, Max:62  calle: 25, carrera:190
+Edificios omitidos 0/2
+------------------
+2 est: 78 min: 40, Opt:160, Max:280  calle: 45, carrera:180
+Edificios omitidos 1/2
+------------------
+11 est: 18 min: 10, Opt:70, Max:130  calle: 75, carrera:170
+Edificios omitidos 0/1
+------------------
+7 est: 26 min: 12, Opt:66, Max:117  calle: 70, carrera:125
+Edificios omitidos 0/1
+------------------
+23 est: 29 min: 16, Opt:56, Max:72  calle: 115, carrera:130
+Edificios omitidos 0/1
+------------------
+Ningun edificio en este cuadrante con limite:
+ Ancho: 31.25, Alto: 31.25
+------------------
+6 est: 27 min: 1, Opt:13, Max:33  calle: 100, carrera:200
+17 est: 93 min: 12, Opt:60, Max:93  calle: 85, carrera:220
+Edificios omitidos 0/2
+PS C:\Users\juan manuel\OneDrive\Escritorio\problema>

@@ -38,6 +38,7 @@ class Salon:
         self.capOpt = capOpt
         self.capMax = capMax
         self.estudiantes = []
+        
     def __str__(self) -> str:
         return f'El salon {self.idSalon} tiene {len(self.estudiantes)}. Min {self.capMin} Max {self.capMax}'
         

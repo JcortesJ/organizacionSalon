@@ -1,0 +1,20 @@
+N <- 7
+id_1, x_1, y_1, loc_1
+id_1, x_1, y_1, loc_1
+id_1, x_1, y_1, loc_1
+id_1, x_1, y_1, loc_1
+id_1, x_1, y_1, loc_1
+id_1, x_1, y_1, loc_1
+id_1, x_N, y_N, loc_N 
+M <- 5
+id_2, x_1, y_1, loc_1
+id_2, x_1, y_1, loc_1
+id_2, x_1, y_1, loc_1
+id_2, x_1, y_1, loc_1
+id_2, x_M, y_M, loc_M 
+K <- 5 
+id_3, edificio_1, piso_1,  max_1, opt_1, max_1
+id_3, edificio_1, piso_1,  max_1, opt_1, max_1
+id_3, edificio_1, piso_1,  max_1, opt_1, max_1
+id_3, edificio_1, piso_1,  max_1, opt_1, max_1
+id_3, edificio_K, piso_K,  max_K, opt_K, max_K

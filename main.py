@@ -5,6 +5,7 @@ from QuadTree import Area,QuadTree
 from Estudiante import Estudiante
 from prueba import run
 from Edificio import Edificio,Salon
+
 personas_x = []
 personas_y = []
 # Datos de personas y edificios
@@ -85,3 +86,26 @@ ax.legend(bbox_to_anchor = (0.95, 0.6))
 # Mostrar o guardar el gráfico
 plt.savefig('mapaOrganizado.jpg')
 plt.show()
+
+
+def imprimirFinal(): 
+        x = raiz
+        #Buscamos el area de 0, 0
+        while (x.dividido):
+            x = x.no
+        #Recorremos cada edificio del area
+        while (x.next != null):
+            for e in x.edificios:
+                print("EDIFICIO:"+ e.id)
+                #if (len(e.salones)<=0):
+                #    print("Edificio no utilizado")
+                #else:
+                for i in e.salones:
+                    print("   SALON: "+ i.id )
+                    for j in i.estudiantes:
+                        print("    Estudiante: "+j.id+" distancia a edificio: "+ j.distancia)
+            x = x.next
+
+imprimirFinal()
+
+#asignar 
