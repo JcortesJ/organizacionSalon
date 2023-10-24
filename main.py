@@ -25,7 +25,7 @@ def generar_estudiantes(n):
         estudiantes.append(estudiante)
     return estudiantes
 
-nEst = 500
+nEst = 1500
 listaEstudiantes = generar_estudiantes(nEst)
 
 # for i in range(nEst):

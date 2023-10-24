@@ -27,7 +27,7 @@ class Edificio:
         for s in range(self.numeroSalones):
             if(s % cambioPisos == 0):
                 piso = int(str(i)+str(s))
-                #falta añadir estudiantes
+                #Aniadimos 
                 self.listaSalones.append(Salon(capMax=capMax,idSalon=piso,capMin=capMin,capOpt=capOpt))
     
 #Clase para identificar los salones

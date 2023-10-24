@@ -307,6 +307,7 @@ class QuadTree:
         edificiosNoUsados.extend(x.imprimirEdificios())
         return edificiosNoUsados
         #Función para imprimir los edificios del cuadrante
+    #Funcion para acomodar los edificios a que cumplan el mínimo o lo más cercano a este
     def acomodarEdificios(self):
         if (not self.dividido):
  
@@ -355,6 +356,27 @@ class QuadTree:
                         self.edificios[e].listaEstudiantes = extraEstudiantes
                         extraEstudiantes = None
                         break
+                #finalmente recorremos el cuadrante de nuevo para saber 
+                #si hay alguno que supere la capacidad máxima, que lo mueva al otro edificio
+                
+                if len(self.edificios[0].listaEstudiantes) >= self.edificios[0].capMax:
+                    #movemos al siguiente edificio (index 1)
+                    dif = abs(len(self.edificios[0].listaEstudiantes) - self.edificios[0].capMax)
+                    if (len(self.edificios[1].listaEstudiantes)+dif) < self.edificios[1].capMax:
+                    #creamos la lueva lista
+                        moverEstudiantes = self.edificios[0].listaEstudiantes[self.edificios[0].capMax:]
+                        self.edificios[1].listaEstudiantes.extend(moverEstudiantes)
+                        #actualizamos la lista
+                        self.edificios[0].listaEstudiantes = self.edificios[0].listaEstudiantes[:self.edificios[0].capMax]
+                elif len(self.edificios[1].listaEstudiantes) >= self.edificios[1].capMax:
+                    #movemos al siguiente edificio (index 1)
+                    dif = abs(len(self.edificios[1].listaEstudiantes) - self.edificios[1].capMax)
+                    if (len(self.edificios[0].listaEstudiantes)+dif) < self.edificios[0].capMax:
+                    #creamos la lueva lista
+                        moverEstudiantes = self.edificios[1].listaEstudiantes[self.edificios[1].capMax:]
+                        self.edificios[0].listaEstudiantes.extend(moverEstudiantes)
+                        #actualizamos la lista
+                        self.edificios[1].listaEstudiantes = self.edificios[1].listaEstudiantes[:self.edificios[1].capMax]
                                 
             """    
                 for e in self.edificios:
