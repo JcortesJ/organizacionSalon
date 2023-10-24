@@ -280,8 +280,7 @@ class QuadTree:
             print("Cuadrante dividido")
     
     #Función para imprimir los edificios de cada cuadrante desde la hoja actual en adelante
-    def recorrerDesdeHoja(self):
-        
+    def recorrerDesdeHoja(self): 
         x = self
         while (x.dividido):
             x = x.no
@@ -290,6 +289,50 @@ class QuadTree:
             print("------------------")
             x = x.next
         x.imprimirEdificios()
-       
+        #Función para imprimir los edificios del cuadrante
+    def acomodarEdificios(self):
+        if (not self.dividido):
+            if (len(self.edificios) > 0):
+                #primero ajustamos a todos los edificios a que tengan el minimo
+                extraEstudiantes = []
+                for edificio in self.edificios:
+                    if(len(edificio.listaEstudiantes) > edificio.capMin):
+                        #primero vamos a llenar la lista extra estudiantes
+                        extraEstudiantes = edificio.listaEstudiantes
+                        edificio.listaEstudiantes = []
+                        break
+                i = 0
+                while(i < len(self.edificios) and len(extraEstudiantes)!=0):
+                    if(len(edificio.listaEstudiantes) > edificio.capMin):
+                        #calculamos la diferencia
+                        dif = len(edificio.listaEstudiantes) - edificio.capMin
+                        #sacamos a los estudiantes extras y los metemos en la lista
+                        extraEstudiantes.extend(edificio.listaEstudiantes[:dif])
+                        #actualizamos la lista del edificio al minimo
+                        edificio.listaEstudiantes = edificio.listaEstudiantes[dif:]
+                    elif (len(edificio.listaEstudiantes) < edificio.capMin and len(extraEstudiantes)> 0 ):
+                        #metemos al minimo de estudiantes en el edificio pero primero calculamos la diferencia
+                        dif = len(extraEstudiantes) - edificio.capMin
+                        if(dif>0):
+                            #hay suficientes estudiantes para meterlos y metemos solo el minimo
+                            edificio.listaEstudiantes.extend(extraEstudiantes[:dif])
+                            #actualizamos la lista de estudiantes extras
+                            extraEstudiantes = extraEstudiantes[dif:]
+                        else:
+                            #solo podemos meter los estudiantes extras que haya
+                            edificio.listaEstudiantes.extend(extraEstudiantes)
+                    i+=1
+                    
+
+    #funcion para acomodar a los estudiantes al minimo de edificios y meterlos en salon
+    def acomodarDesdeHoja(self):
+        x = self
+        while (x.dividido):
+            x = x.no
+        while (x.next != None):
+            x.acomodarEdificios()
+            x = x.next
+        x.acomodarEdificios()
+    
 
 

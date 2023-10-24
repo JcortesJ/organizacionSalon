@@ -25,11 +25,13 @@ edificios = run()
 for i in edificios:
     raiz.insertarEdificio(i)
 
-raiz.insertarEdificio(Edificio(30,30,6))
+
+
 asignados = []
 for j in listaEstudiantes:
    asignados.append(raiz.insertarEstudiante(j))
 
 #raiz.no.no.imprimirEdificios()
+#raiz.acomodarDesdeHoja()
 raiz.recorrerDesdeHoja()
 #raiz.so.imprimirEdificios()
