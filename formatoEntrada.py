@@ -1,4 +1,3 @@
-
 def obtenerStringArchivo(raiz_archivo):
     lineas = ''
     try:
@@ -25,7 +24,7 @@ id_1, edificio_1, piso_1,  max_1, opt_1, max_1 (separados por coma y uno por lí
  ...
 id_K, edificio_K, piso_K,  max_K, opt_K, max_K
 """
-def run():
+def leerDatos():
     texto = obtenerStringArchivo('./formatoEntrada.txt')
     if texto != '':
         lineas =texto.splitlines()
@@ -46,27 +45,43 @@ def run():
             nEstudiantes = int(lineas[0][5:])
             nEstudiante= True
         elif nEstudiante and lineas[i][0]!='M':
-            infoEstudiante.append(lineas[i].split(','))
+            infoEstudiante.append(lineas[i].split(', '))
         if lineas[i][0]=='M':
             nEstudiante = False
             nEdificios = int(lineas[i][5:])
             nEdificio = True
         elif nEdificio and lineas[i][0]!='K':
-            infoEdificio.append(lineas[i].split(','))
+            infoEdificio.append(lineas[i].split(', '))
         if lineas[i][0]=='K':
             nSalon = True
             nEdificios = int(lineas[i][5:])
             nEdificio = False
         elif nSalon:
-            infoSalon.append(lineas[i].split(','))
+            infoSalon.append(lineas[i].split(', '))
     #regresamos toda la informacion, primero los estudiantes en el indice 0
     #edificios indice 1
     #salones indice 2
-    respuesta = [infoEstudiante,infoEdificio,infoSalon]
     
+    #en este momento ya tenemos identificados los estudiantes, ahora debemos enlazar los salones a los edificios
+    #en el indice 2 de cada lista de infoSalon está la id del edificio. Creamos un diccionario que tenga esta informacion
+    salonesYedificios = dict()
+    for edificio in infoEdificio:
+        salonesYedificios[edificio[0]] = []
+
+
+    for salon in infoSalon:
+        l = salonesYedificios[salon[1]]
+        l.append(salon)
+        salonesYedificios[salon[1]] = l
+        #actualizamos el diccionario
+    infoSalon = None
+    respuesta = [infoEstudiante,infoEdificio,salonesYedificios]
+
     return respuesta
         
 if __name__ == '__main__':
-    lista = run()[0]
-    for l in lista:
+    lista = leerDatos()
+
+    print('salones y edificios')
+    for l in lista[2]:
         print(f'***  {l}')
