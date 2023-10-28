@@ -1,111 +1,25 @@
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import random
 from QuadTree import Area,QuadTree
-from Estudiante import Estudiante
-from prueba import run
-from Edificio import Edificio,Salon
+from generarGrafico import generarGrafico
+from generacionEntrada import generarEdificios, generarEstudiantes
 
-personas_x = []
-personas_y = []
-# Datos de personas y edificios
-edificios_x =[]
-edificios_y =[]
-edificios_noUsados = []
-def generar_estudiantes(n):
-    estudiantes = []
-    for i in range(n):
-        id = random.randint(1000000000, 9999999999)
-        calle = random.randint(0, 250)
-        
-        #esto es para graficar su ubicacion
-        personas_x.append(calle)
-        carrera = random.randint(0, 250)
-        personas_y.append(carrera)
-        estudiante = Estudiante(id, calle, carrera)
-        estudiantes.append(estudiante)
-    return estudiantes
+# Generamos los datos de los estudiantes y edificios
+estudiantes = generarEstudiantes(1500)
+edificios = generarEdificios()
 
-nEst = 1500
-listaEstudiantes = generar_estudiantes(nEst)
-
-# for i in range(nEst):
-#    print(listaEstudiantes[i])
-
+#Creamos el mapa inicial (la raiz del arbol)
 raiz = QuadTree(Area(0,0,250,250))
 
-edificios = run()
+# Insertamos los edificios en el arbol
 for i in edificios:
     raiz.insertarEdificio(i)
 
-
-
-#asignados = []
-print(f'con mi metodo')
-for j in listaEstudiantes:
+# Insertamos los estudiantes en su edificio más cercano
+for j in estudiantes:
    raiz.insertarEstudiante(j)
 
-#raiz.no.no.imprimirEdificios()
+# Reacomodamos los estudiantes ubicados en los edificios
 raiz.acomodarDesdeHoja()
-edificios_noUsados = raiz.recorrerDesdeHoja()
+
+generarGrafico(raiz,estudiantes,edificios)
 
 
-
-
-
-#generacion del grafico para entender:
-
-for e in edificios:
-    edificios_x.append(e.calle)
-    edificios_y.append(e.carrera)
-ed_nU_x = []
-ed_nU_y = []
-for e in edificios_noUsados:
-    ed_nU_x.append(e.calle)
-    ed_nU_y.append(e.carrera)
-
-# Cargar una imagen de fondo
-img = mpimg.imread('map.png')  
-
-# Crear el gráfico con la imagen de fondo centrada
-fig, ax = plt.subplots()
-ax.imshow(img, extent=[min(personas_x + edificios_x), max(personas_x + edificios_x),
-                       min(personas_y + edificios_y), max(personas_y + edificios_y)])
-
-# Agregar elementos gráficos
-ax.scatter(personas_x, personas_y, color='blue', label='Personas', marker='o',s=10)
-ax.scatter(edificios_x, edificios_y, color='red', label='Edificios', marker='s', s=100, alpha=0.5)
-ax.scatter(ed_nU_x, ed_nU_y, color='green', label='E. no usados', marker='s', s=100)
-
-# Personalizar el gráfico
-ax.set_xlabel('Calles')
-ax.set_ylabel('Carreras')
-ax.set_title('Gráfico de Personas y Edificios')
-ax.legend(bbox_to_anchor = (0.95, 0.6))
-#plt.legend().set_visible(False)
-# Mostrar o guardar el gráfico
-plt.savefig('mapaOrganizado.jpg')
-plt.show()
-
-
-def imprimirFinal(): 
-        x = raiz
-        #Buscamos el area de 0, 0
-        while (x.dividido):
-            x = x.no
-        #Recorremos cada edificio del area
-        while (x.next != null):
-            for e in x.edificios:
-                print("EDIFICIO:"+ e.id)
-                #if (len(e.salones)<=0):
-                #    print("Edificio no utilizado")
-                #else:
-                for i in e.salones:
-                    print("   SALON: "+ i.id )
-                    for j in i.estudiantes:
-                        print("    Estudiante: "+j.id+" distancia a edificio: "+ j.distancia)
-            x = x.next
-
-imprimirFinal()
-
-#asignar 

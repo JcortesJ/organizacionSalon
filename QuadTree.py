@@ -380,7 +380,6 @@ class QuadTree:
                         edificiosNoUsados.append(edificio)
                 print(f'Edificios omitidos {omitido}/{len(self.edificios)}')
                 
-                
         else:
             print("Cuadrante dividido")
 
@@ -477,17 +476,7 @@ class QuadTree:
                 for e in self.edificios:
                     if len(e.listaEstudiantes)>0:
                         self.asignarSalones(edificio=e)
-                                
-            """    
-                for e in self.edificios:
-                    print(e)
-                print('----------')   
-                
-            elif len(self.edificios)==1:
-                    print(self.edificios[0])
-                    print('--------')
-            """
-
+                            
     #funcion para acomodar a los estudiantes al minimo de edificios y meterlos en salon
     def acomodarDesdeHoja(self):
         x = self

@@ -4,8 +4,6 @@ def obtenerStringArchivo(raiz_archivo):
         with open(raiz_archivo) as arhivoPlano:
             lineas = arhivoPlano.read()
             #esta funcion solo existe para no repetir tanto este codigo
-            
-
     except FileNotFoundError:
         print('al parecer has escrito mal la direccion del archivo.')
     return lineas
