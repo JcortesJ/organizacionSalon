@@ -166,7 +166,7 @@ class QuadTree:
             if e.disponible:
                 edificiosDisponibles.append(e)
         return edificiosDisponibles
-    
+
     def insertarEstudiante(self,estudiante:Estudiante):
         #Si el cuadrante no está dividido, se inserta el estudiante en el edificio correspondiente
         if(not self.dividido):
@@ -174,18 +174,20 @@ class QuadTree:
             if self.next  != None or self.before != None:
                 areaSiguiente = self.next
                 arearAnterior = self.before
-                edificiosDisponibles = self.verificarEdificiosDisponibles(self.edificios)
-                while (len(edificiosDisponibles) <= 0):
+                edificiosDisponibles = []
+                edificiosDisponibles.extend(self.verificarEdificiosDisponibles(self.edificios))
+                numAreasCercanas = 0
+                while (len(edificiosDisponibles) <= 0 or numAreasCercanas <6):
                 #puse los ifs porque a veces me daba error
                 # a veces = cuando incremento los estudiantes
                     if areaSiguiente != None:
-                        edificiosDisponibles = self.verificarEdificiosDisponibles(areaSiguiente.edificios)
+                        edificiosDisponibles.extend(self.verificarEdificiosDisponibles(areaSiguiente.edificios))
                         areaSiguiente = areaSiguiente.next
-                        
+                        numAreasCercanas += 1
                     if arearAnterior != None:
-                        edificiosDisponibles.extend(arearAnterior.edificios)
+                        edificiosDisponibles.extend(self.verificarEdificiosDisponibles(arearAnterior.edificios))
                         arearAnterior = arearAnterior.before
-                        
+                        numAreasCercanas += 1   
             
             #Se recorren los edificios del cuadrante con el fin de encontrar el más cercano
                 edificioCercanos = [edificiosDisponibles[0]]

@@ -64,7 +64,7 @@ def leerDatos():
     #en el indice 2 de cada lista de infoSalon está la id del edificio. Creamos un diccionario que tenga esta informacion
     salonesYedificios = dict()
     for edificio in infoEdificio:
-        salonesYedificios[edificio[0]] = []
+        salonesYedificios[int(edificio[0])] = []
 
 
     for salon in infoSalon:
@@ -81,5 +81,6 @@ if __name__ == '__main__':
     lista = leerDatos()
 
     print('salones y edificios')
-    for l in lista[2]:
-        print(f'***  {l}')
+    print(lista[2][5845])
+    #for l in lista[2]:
+    #    print(f'***  {type(l)}')

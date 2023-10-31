@@ -11,7 +11,7 @@ for i in range(N):
     x_N = random.randint(0, 250)
     y_N = random.randint(0, 250)
     loc_N = random.choice(['Norte', 'Centro', 'Sur', 'Oriente', 'Occidente'])
-    print(f"{id_N}, {x_N}, {y_N}, {loc_N}")
+    #print(f"{id_N}, {x_N}, {y_N}, {loc_N}")
 
 # Generación de datos para M
 M = 20
@@ -22,7 +22,7 @@ for i in range(M):
     x_M = random.randint(0, 250)
     y_M = random.randint(0, 250)
     loc_M = random.choice(['Norte', 'Centro', 'Sur', 'Oriente', 'Occidente'])
-    print(f"{id_M}, {x_M}, {y_M}, {loc_M}")
+    #print(f"{id_M}, {x_M}, {y_M}, {loc_M}")
     ids_edificios.append(id_M)
 
 # Generación de datos para K
@@ -35,7 +35,7 @@ for i in range(K):
     max_K = random.randint(0, 40)
     opt_K = random.randint(0, 30)
     min_K = random.randint(0, 10)
-    print(f"{id_K}, {id_M}, {piso_K}, {max_K}, {opt_K}, {min_K}")
+    #print(f"{id_K}, {id_M}, {piso_K}, {max_K}, {opt_K}, {min_K}")
 
 #en esta funcion debo hacer los datos de edificio 
 def generarEdificios():
@@ -65,9 +65,10 @@ def generarEdificios():
     Edificio(id = 22,capMin=8, capOpt=28, capMax=36, numeroSalones=4, calle=100, carrera=120,pisos=2),
     Edificio(id = 23,capMin=8, capOpt=28, capMax=36, numeroSalones=2, calle=115, carrera=130,pisos=3),
     Edificio(id = 24,capMin=8, capOpt=28, capMax=36, numeroSalones=3, calle=160, carrera=170,pisos=2),
-    Edificio(id = 25,capMin=8, capOpt=28, capMax=36, numeroSalones=2, calle=227, carrera=121,pisos=4),
+    Edificio(id = 25,capMin=13, capOpt=50, capMax=70, numeroSalones=2, calle=227, carrera=121,pisos=4),
     Edificio(id = 26,capMin=8, capOpt=28, capMax=36, numeroSalones=4, calle=180, carrera=128,pisos=2),
-    Edificio(id = 27,capMin=8, capOpt=28, capMax=36, numeroSalones=2, calle=144, carrera=219,pisos=2)
+    Edificio(id = 27,capMin=8, capOpt=28, capMax=36, numeroSalones=2, calle=144, carrera=219,pisos=2),
+     #Edificio(id = 28,capMin=8, capOpt=28, capMax=36, numeroSalones=2, carrera=150, calle=220,pisos=2)
     ]
     return edificios
 

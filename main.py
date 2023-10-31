@@ -1,9 +1,10 @@
 from QuadTree import Area,QuadTree
 from generarGrafico import generarGrafico
 from generacionEntrada import generarEdificios, generarEstudiantes
+from formatoEntrada import leerDatos
 
 # Generamos los datos de los estudiantes y edificios
-estudiantes = generarEstudiantes(1500)
+estudiantes = generarEstudiantes(500)
 edificios = generarEdificios()
 
 #Creamos el mapa inicial (la raiz del arbol)

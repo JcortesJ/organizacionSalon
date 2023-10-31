@@ -41,8 +41,8 @@ def generarGrafico(raiz, estudiantes, edificios):
         n = n.next
 
     # Personalizar el gráfico con los ejes y el título
-    ax.set_xlabel('Calles')
-    ax.set_ylabel('Carreras')
+    ax.set_xlabel('Carrera')
+    ax.set_ylabel('Calle')
     ax.set_title('Gráfico de Personas y Edificios')
     ax.legend(bbox_to_anchor = (0.95, 0.6))
 
