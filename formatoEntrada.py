@@ -79,8 +79,8 @@ def leerDatos():
         
 if __name__ == '__main__':
     lista = leerDatos()
-
-    print('salones y edificios')
-    print(lista[2][5845])
+    #print(lista[0])
+    #print('salones y edificios')
+    print(lista[2][4028])
     #for l in lista[2]:
     #    print(f'***  {type(l)}')

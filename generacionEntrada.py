@@ -1,17 +1,17 @@
 # Generación de datos para N
 import random
-from Edificio import Edificio
+from Edificio import Edificio, Salon
 from Estudiante import Estudiante
 
 
-N = 250
+N = 500
 print('N <- 250')
 for i in range(N):
     id_N = random.randint(10000, 99999)
     x_N = random.randint(0, 250)
     y_N = random.randint(0, 250)
     loc_N = random.choice(['Norte', 'Centro', 'Sur', 'Oriente', 'Occidente'])
-    #print(f"{id_N}, {x_N}, {y_N}, {loc_N}")
+    print(f"{id_N}, {x_N}, {y_N}, {loc_N}")
 
 # Generación de datos para M
 M = 20
@@ -22,7 +22,7 @@ for i in range(M):
     x_M = random.randint(0, 250)
     y_M = random.randint(0, 250)
     loc_M = random.choice(['Norte', 'Centro', 'Sur', 'Oriente', 'Occidente'])
-    #print(f"{id_M}, {x_M}, {y_M}, {loc_M}")
+    print(f"{id_M}, {x_M}, {y_M}, {loc_M}")
     ids_edificios.append(id_M)
 
 # Generación de datos para K
@@ -35,13 +35,34 @@ for i in range(K):
     max_K = random.randint(0, 40)
     opt_K = random.randint(0, 30)
     min_K = random.randint(0, 10)
-    #print(f"{id_K}, {id_M}, {piso_K}, {max_K}, {opt_K}, {min_K}")
+    print(f"{id_K}, {id_M}, {piso_K}, {max_K}, {opt_K}, {min_K}")
 
 #en esta funcion debo hacer los datos de edificio 
-def generarEdificios():
+def generarEdificios(lista,diccionario):
     #creacion de salones primero y luego de edificios
     
-    edificios = [
+    edificios = []
+    for i in range(len(lista)):
+    #id_1, x_1, y_1, loc_1 <- Información edificio 1 (separados por coma y uno por línea)
+        id = int(lista[i][0])
+        capMin = 0
+        capMax = 0
+        capOpt = 0
+        numeroSalones = len(diccionario[id])
+        calle = int(lista[i][1])
+        carrera= int(lista[i][2])
+        listaSalones =[]
+        for salon in diccionario[id]:
+            s = Salon(capMax=int(salon[3]),capOpt=int(salon[4]),capMin=int(salon[5]),idSalon=int(salon[0]))
+            #id_K, edificio_K, piso_K,  max_K, opt_K, max_K
+            capMax +=int(salon[3])
+            capOpt +=int(salon[4])
+            capMin +=int(salon[5])
+            listaSalones.append(s)
+        
+        edificios.append(Edificio(id=id,calle=calle,carrera=carrera,capMin=capMin,capMax=capMax,capOpt=capOpt
+        ,numeroSalones=numeroSalones,listaSalones=listaSalones))
+    """
     Edificio(id = 1,capMin=2, capOpt=15, capMax=25, numeroSalones=4, calle=130, carrera=75,pisos=2),
     Edificio(id = 2,capMin=5, capOpt=20, capMax=35, numeroSalones=8, calle=45, carrera=180,pisos=2),
     Edificio(id = 3,capMin=1, capOpt=12, capMax=22, numeroSalones=2, calle=85, carrera=120,pisos=2),
@@ -66,21 +87,28 @@ def generarEdificios():
     Edificio(id = 22,capMin=8, capOpt=28, capMax=36, numeroSalones=4, calle=100, carrera=120,pisos=2),
     Edificio(id = 23,capMin=8, capOpt=28, capMax=36, numeroSalones=2, calle=115, carrera=130,pisos=3),
     Edificio(id = 24,capMin=8, capOpt=28, capMax=36, numeroSalones=3, calle=160, carrera=170,pisos=2),
-    Edificio(id = 25,capMin=13, capOpt=50, capMax=70, numeroSalones=2, calle=227, carrera=121,pisos=4),
+    Edificio(id = 25,capMin=13, capOpt=50, capMax=100, numeroSalones=2, calle=227, carrera=121,pisos=4),
+    
     Edificio(id = 26,capMin=8, capOpt=28, capMax=36, numeroSalones=4, calle=180, carrera=128,pisos=2),
     Edificio(id = 27,capMin=8, capOpt=28, capMax=36, numeroSalones=2, calle=144, carrera=219,pisos=2),
-     #Edificio(id = 28,capMin=8, capOpt=28, capMax=36, numeroSalones=2, carrera=150, calle=220,pisos=2)
+     Edificio(id = 28,capMin=8, capOpt=28, capMax=36, numeroSalones=2, carrera=150, calle=220,pisos=2)
     ]
+    """
     
     return edificios
 
 # Generamos los datos de los estudiantes
-def generarEstudiantes(n):
+def generarEstudiantes(lista):
     estudiantes = []
-    for i in range(n):
+    
+    for i in range(len(lista)):
+        #id_1, x_1, y_1, loc_1 <- Información aspirante 1 (separados por coma y uno por línea)
+        estudiantes.append(Estudiante(id=int(lista[i][0]),calle=int(lista[i][1]),carrera=int(lista[i][2])))
+        """
         id = random.randint(1000000000, 9999999999)
         calle = random.randint(0, 250)
         carrera = random.randint(0, 250)
         estudiante = Estudiante(id, calle, carrera)
         estudiantes.append(estudiante)
+        """
     return estudiantes
