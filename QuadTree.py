@@ -293,8 +293,8 @@ class QuadTree:
             salonActual = 0
             nEstEnSalon = 0
 
-            for i in range(0,ocupacion):
-                if (i < edificio.listaSalones[salonActual].capMin-nEstEnSalon+nEstAsignados):
+            while (nEstAsignados < ocupacion):
+                if (nEstAsignados < edificio.listaSalones[salonActual].capMin-nEstEnSalon+nEstAsignados):
                     edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
                     edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
                     nEstAsignados+= 1    
@@ -309,8 +309,8 @@ class QuadTree:
             salonActual = 0
             nEstEnSalon = 0
 
-            for i in range(0,ocupacion):
-                if (i < edificio.listaSalones[salonActual].capMin-nEstEnSalon+nEstAsignados):
+            while (nEstAsignados < ocupacion):
+                if (nEstAsignados < edificio.listaSalones[salonActual].capMin-nEstEnSalon+nEstAsignados):
                     edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
                     edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
                     nEstAsignados+= 1    
@@ -322,8 +322,8 @@ class QuadTree:
                     else:
                         break
 
-            for i in range(nEstAsignados,ocupacion):
-                if (i < edificio.listaSalones[salonActual].capOpt-nEstEnSalon+nEstAsignados):
+            while (nEstAsignados < ocupacion):
+                if (nEstAsignados < edificio.listaSalones[salonActual].capOpt-nEstEnSalon+nEstAsignados):
                     edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
                     edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
                     nEstAsignados+= 1    
@@ -338,8 +338,8 @@ class QuadTree:
             salonActual = 0
             nEstEnSalon = 0
 
-            for i in range(0,ocupacion):
-                if (i < edificio.listaSalones[salonActual].capOpt-nEstEnSalon+nEstAsignados):
+            while (nEstAsignados < ocupacion):
+                if (nEstAsignados < edificio.listaSalones[salonActual].capOpt-nEstEnSalon+nEstAsignados):
                     edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
                     edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
                     nEstAsignados+= 1    
@@ -351,8 +351,8 @@ class QuadTree:
                     else:
                         break
 
-            for i in range(nEstAsignados,ocupacion):
-                if (i < edificio.listaSalones[salonActual].capMax-nEstEnSalon+nEstAsignados):
+            while (nEstAsignados < ocupacion):
+                if (nEstAsignados < edificio.listaSalones[salonActual].capMax-nEstEnSalon+nEstAsignados):
                     edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
                     edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
                     nEstAsignados+= 1    
