@@ -21,6 +21,15 @@ for j in estudiantes:
 # Reacomodamos los estudiantes ubicados en los edificios
 raiz.acomodarDesdeHoja()
 
+
+x = raiz
+while (x.dividido):
+    x = x.no
+while (x.next != None):
+    for i in x.edificios:
+        x.asignarSalones(i)
+    x = x.next
+
 generarGrafico(raiz,estudiantes,edificios)
 
 

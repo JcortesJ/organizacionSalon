@@ -68,9 +68,9 @@ def leerDatos():
 
 
     for salon in infoSalon:
-        l = salonesYedificios[salon[1]]
+        l = salonesYedificios[int(salon[1])]
         l.append(salon)
-        salonesYedificios[salon[1]] = l
+        salonesYedificios[int(salon[1])] = l
         #actualizamos el diccionario
     infoSalon = None
     respuesta = [infoEstudiante,infoEdificio,salonesYedificios]

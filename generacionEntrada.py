@@ -40,6 +40,7 @@ for i in range(K):
 #en esta funcion debo hacer los datos de edificio 
 def generarEdificios():
     #creacion de salones primero y luego de edificios
+    
     edificios = [
     Edificio(id = 1,capMin=2, capOpt=15, capMax=25, numeroSalones=4, calle=130, carrera=75,pisos=2),
     Edificio(id = 2,capMin=5, capOpt=20, capMax=35, numeroSalones=8, calle=45, carrera=180,pisos=2),
@@ -70,6 +71,7 @@ def generarEdificios():
     Edificio(id = 27,capMin=8, capOpt=28, capMax=36, numeroSalones=2, calle=144, carrera=219,pisos=2),
      #Edificio(id = 28,capMin=8, capOpt=28, capMax=36, numeroSalones=2, carrera=150, calle=220,pisos=2)
     ]
+    
     return edificios
 
 # Generamos los datos de los estudiantes
