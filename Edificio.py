@@ -18,20 +18,7 @@ class Edificio:
         a = f'{self.id} est: {len(self.listaEstudiantes)} min: {self.capMin}, Opt:{self.capOpt}, Max:{self.capMax}  calle: {self.calle}, carrera:{self.carrera}'
         return a 
     
-    """
-    def crearSalones(self):
-        #primero tomamos los valores para cada salon
-        capMin = self.numeroSalones/self.capMin 
-        capMax = self.numeroSalones/self.capMax
-        capOpt = self.numeroSalones/self.capOpt
-        cambioPisos = self.numeroSalones/self.pisos
-        i = 0
-        for s in range(self.numeroSalones):
-            if(s % cambioPisos == 0):
-                piso = int(str(i)+str(s))
-                #Aniadimos 
-                self.listaSalones.append(Salon(capMax=capMax,idSalon=piso,capMin=capMin,capOpt=capOpt))
-    """
+
 #Clase para identificar los salones
 class Salon:
     def __init__(self, idSalon, capMin, capOpt, capMax): 
