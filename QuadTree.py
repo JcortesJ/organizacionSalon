@@ -249,8 +249,8 @@ class QuadTree:
                 for j in range(0,ocupacion):
                     if (nEstAsignados< ocupacion):
                         edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
-                        edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[i].idSalon
-                        print(edificio.listaEstudiantes[nEstAsignados].id+', '+edificio.listaSalones[i].idSalon+', '+ edificio.id)
+                        #edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[i].idSalon
+                        print(f'{edificio.listaEstudiantes[nEstAsignados].id} , {edificio.listaSalones[i].idSalon} , {edificio.id}')
                         nEstAsignados+= 1     
                     else:
                         break      
@@ -259,15 +259,15 @@ class QuadTree:
             for i in range(0,len(edificio.listaSalones)):
                 for j in range(0,edificio.listaSalones[i].capMin):
                     edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
-                    edificio.listaEstudiantes[nEstAsignados].lugar = edificio.listaSalones[i].idSalon
-                    print(edificio.listaEstudiantes[nEstAsignados].id+', '+edificio.listaSalones[i].idSalon+', '+ edificio.id)
+                    #edificio.listaEstudiantes[nEstAsignados].lugar = edificio.listaSalones[i].idSalon
+                    print(f'{edificio.listaEstudiantes[nEstAsignados].id}, {edificio.listaSalones[i].idSalon}, {edificio.id}')
                     nEstAsignados+= 1
             for i in range(0,len(edificio.listaSalones)):
                 for j in range(edificio.listaSalones[i].capMin,edificio.listaSalones[i].capOpt):
                     if (nEstAsignados< ocupacion):
                         edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
-                        edificio.listaEstudiantes[nEstAsignados].lugar = edificio.listaSalones[i].idSalon
-                        print(edificio.listaEstudiantes[nEstAsignados].id+', '+edificio.listaSalones[i].idSalon+', '+ edificio.id)
+                     #   edificio.listaEstudiantes[nEstAsignados].lugar = edificio.listaSalones[i].idSalon
+                        print(f'{edificio.listaEstudiantes[nEstAsignados].id}, {edificio.listaSalones[i].idSalon}, {edificio.id}')
                         nEstAsignados+=1
                     else:
                         break
@@ -277,14 +277,14 @@ class QuadTree:
                 for j in range(0,edificio.listaSalones[i].capOpt):
                     edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
                     edificio.listaEstudiantes[nEstAsignados].lugar = edificio.listaSalones[i].idSalon
-                    print(edificio.listaEstudiantes[nEstAsignados].id+', '+edificio.listaSalones[i].idSalon+', '+ edificio.id)
+                    print(f'{edificio.listaEstudiantes[nEstAsignados].id}, {edificio.listaSalones[i].idSalon}, {edificio.id}')
                     nEstAsignados+= 1
             for i in range(0,len(edificio.listaSalones)):
                 for j in range(edificio.listaSalones[i].capOpt,edificio.listaSalones[i].capMax):
                     if (nEstAsignados< ocupacion):
                         edificio.listaSalones[i].estudiantes.append(edificio.listaEstudiantes[j])
                         edificio.listaEstudiantes[nEstAsignados].lugar = edificio.listaSalones[i].idSalon
-                        print(edificio.listaEstudiantes[nEstAsignados].id+', '+edificio.listaSalones[i].idSalon+', '+ edificio.id)
+                        print(f'{edificio.listaEstudiantes[nEstAsignados].id}, {edificio.listaSalones[i].idSalon}, {edificio.id}')
                         nEstAsignados+=1
                     else:
                         break
@@ -302,7 +302,7 @@ class QuadTree:
                 if (nEstAsignados < edificio.listaSalones[salonActual].capMin-nEstEnSalon+nEstAsignados):
                     edificio.listaSalones[salonActual].estudiantes.append(edificio.listaEstudiantes[nEstAsignados])
                     edificio.listaEstudiantes[nEstAsignados].lugar = 'Edificio: '+ edificio.id ,'Piso-salon: ',edificio.listaSalones[salonActual].idSalon
-                    print(edificio.listaEstudiantes[nEstAsignados].id+', '+edificio.listaSalones[i].idSalon+', '+ edificio.id)
+                    #print(edificio.listaEstudiantes[nEstAsignados].id+', '+edificio.listaSalones[i].idSalon+', '+ edificio.id)
                     nEstAsignados+= 1    
                     nEstEnSalon+=1
                 else:
